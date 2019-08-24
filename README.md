@@ -1,6 +1,6 @@
 
 Batmud Path Finder
-Copyright Teppo Kankaanp‰‰
+Copyright Teppo Kankaanp
 
 
 This utility is a plugin for a Java based client Batclient for a game
