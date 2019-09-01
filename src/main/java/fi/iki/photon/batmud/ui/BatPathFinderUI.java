@@ -784,13 +784,18 @@ public class BatPathFinderUI implements SolvedListener {
 				String toStr = window.getTo();
 				start = area.parseLocation(fromStr);			
 				end = area.parseLocation(toStr);
+				int travel = window.getTravel();
+
 				if (end == null) {
 					report("Destination unknown or malformed.");
 					return;				
 				}
 				
 	    		if(start.getContinent() != end.getContinent()) {
-	    			window.setTravel(5);
+	    			if (travel == 2)
+	    				window.setTravel(5);
+	    			if (travel == 3)
+						window.setTravel(4);
 	    		}
 	    		doSearch();
 	    	}

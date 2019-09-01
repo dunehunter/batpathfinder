@@ -64,11 +64,11 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testValidLocation" time="0.001"/>
+  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testValidLocation" time="0.002"/>
   <testcase classname="fi.iki.photon.batmud.AreaTest" name="testArea" time="0.002"/>
-  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testGetCost" time="0.001"/>
-  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testGetData" time="0.001"/>
-  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testFindOnMap" time="0"/>
+  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testGetCost" time="0"/>
+  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testGetData" time="0"/>
+  <testcase classname="fi.iki.photon.batmud.AreaTest" name="testFindOnMap" time="0.001"/>
   <testcase classname="fi.iki.photon.batmud.AreaTest" name="testApprox" time="0.001"/>
   <testcase classname="fi.iki.photon.batmud.AreaTest" name="testGetPlaneLocationNeighbors" time="0.001"/>
 </testsuite>
