@@ -536,10 +536,17 @@ public class BatPathFinderUI implements SolvedListener {
 		} else if ("goto".equals(cmds[0])) {
 			if (cmds.length == 2) {
 				window.setTo(cmds[1]);
-			}
-			if (cmds.length == 5) { // format $w goto L 0 X Y
-				String goTo = cmds[1] + " " + cmds[2] + " " + cmds[3] + " " + cmds[4];
-				window.setTo(goTo);			
+			} else if (cmds.length > 2) {
+				String regex = "L ([0-5]) ([0-9]+)(?:x|)(?: |,|, )([0-9]+)";
+				Pattern p = Pattern.compile(regex);
+				String cmd = cmds[1] + " " + cmds[2] + " " + cmds[3] + " " + cmds[4];
+				Matcher m = p.matcher(cmd);
+				if (m.find()) {
+					String goTo = "L " + m.group(1) + " " + m.group(2) + " " + m.group(3);
+					window.setTo(goTo);
+				} else {
+					report("Location not found.");
+				}
 			}
 			startWhereami = true;
 			plugin.doCommand("whereami");

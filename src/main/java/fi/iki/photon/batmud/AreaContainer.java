@@ -24,10 +24,7 @@ import java.io.File;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Main interfacing class for the program logic containing all the
@@ -444,10 +441,38 @@ public class AreaContainer {
 	 */
 	
 	private NameLocation getNameLocation(String name) {
-		return allNames.get(name.toLowerCase());
+//		return allNames.get(name.toLowerCase());
+        for (Map.Entry<String, NameLocation> e : allNames.entrySet()) {
+            if (isSubstring(name.toLowerCase(), e.getKey()) != -1) {
+                return e.getValue();
+            }
+        }
+        return null;
 	}
 
-	/**
+    private static int isSubstring(String s1, String s2)
+    {
+        int M = s1.length();
+        int N = s2.length();
+
+        /* A loop to slide pat[] one by one */
+        for (int i = 0; i <= N - M; i++) {
+            int j;
+
+            /* For current index i, check for
+            pattern match */
+            for (j = 0; j < M; j++)
+                if (s2.charAt(i + j) != s1.charAt(j))
+                    break;
+
+            if (j == M)
+                return i;
+        }
+
+        return -1;
+    }
+
+    /**
 	 * Returns all the NameLocations.
 	 * @return All the NameLocations.
 	 */
