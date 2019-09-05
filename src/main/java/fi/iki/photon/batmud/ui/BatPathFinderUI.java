@@ -198,6 +198,10 @@ public class BatPathFinderUI implements SolvedListener {
 			boolean first = true;
 			boolean sailed = false;
 			for (i = 0; i < parts.length && length < limit - 1 && !sailed; ) {
+				if (parts[i] == null || parts[i].equals("")) {
+					++i;
+					continue;
+				}
 				if (parts[i].charAt(0) >= '0' && parts[i].charAt(0) <= '9') {
 					int currLength = Integer.parseInt(parts[i]);
 					length++;
