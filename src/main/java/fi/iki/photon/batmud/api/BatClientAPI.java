@@ -125,8 +125,8 @@ public class BatClientAPI extends BatClientPlugin implements BatClientPluginTrig
 	public ParsedResult trigger(ParsedResult a) {
 		if (initialized) {
 			bpfui.whereamiTrigger(a.getStrippedText());
-			boolean b = bpfui.trigger(a.getStrippedText());
-			if (b) return a;
+			//boolean b = bpfui.trigger(a.getStrippedText());
+			//if (b) return a;
 		}
 		return null;
 	}

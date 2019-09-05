@@ -31,7 +31,7 @@ package fi.iki.photon.batmud;
 
 class PlaneLocation implements Location {
 	private final short x, y; // x and y vary from 0 to about 1000
-	private final byte continent; // continent varies from -1 to 4.
+	private final byte continent; // continent varies from -1 to 5.
 	
 	/**
 	 * A standard constructor.

@@ -131,7 +131,7 @@ public class BatPathFinderUI implements SolvedListener {
 		int i = 0;
 		int remaining = -1;
 		if (!ship) {
-			plugin.doCommand("animist soul stop");
+//			plugin.doCommand("animist soul stop");
 			plugin.doCommand("set look_on_move off");
 
 			int length = 0, prevI;
@@ -190,7 +190,7 @@ public class BatPathFinderUI implements SolvedListener {
 //			System.out.println(command.trim());
 //			plugin.doCommand(command.trim());
 			plugin.doCommand("set look_on_move on");
-			plugin.doCommand("animist soul follow");
+//			plugin.doCommand("animist soul follow");
 			plugin.doCommand("look");
 		} else {
 			int length = 0;
@@ -217,7 +217,7 @@ public class BatPathFinderUI implements SolvedListener {
 					} else {
 						if (!first) command = command + ",";
 						if (parts[i].length() <= 3) { command = command + "1 " + parts[i].replace("~", " "); }
-						else { 
+						else {
 							command = command + parts[i].replace("~", " ");
 						}
 					}
@@ -259,25 +259,30 @@ public class BatPathFinderUI implements SolvedListener {
 		if (window.isGoEnabled()) {
 			window.setFrom("");
 			int travel = window.getTravel();
-			if (travel == 3 || travel == 4) {
-				walkString = walk(walkString, (window.getNav()+1)*3, true, true);
-				report("Path left: " + walkString);
-			} else {
-				if (travel == 2 || turbo) {
-					window.setGoEnabled(false);
-					walkString = walk(walkString, 200, false, false);
+
+			try {
+				if (travel == 3 || travel == 4) {
+					walkString = walk(walkString, (window.getNav()+1)*3, true, true);
 					report("Path left: " + walkString);
-					window.setGoEnabled(true);
 				} else {
-					window.setGoEnabled(false);
-					walkString = walk(walkString, 50, true, false);
-					report("Path left: " + walkString);
-					window.setGoEnabled(true);
+					if (travel == 2 || turbo) {
+						window.setGoEnabled(false);
+						walkString = walk(walkString, 200, false, false);
+						report("Path left: " + walkString);
+						window.setGoEnabled(true);
+					} else {
+						window.setGoEnabled(false);
+						walkString = walk(walkString, 50, true, false);
+						report("Path left: " + walkString);
+						window.setGoEnabled(true);
+					}
 				}
-			}
-			if ("".equals(walkString)) {
-				window.setFrom(window.getTo());
-				window.setTo("");
+				if ("".equals(walkString)) {
+					window.setFrom(window.getTo());
+					window.setTo("");
+				}
+			} catch (Exception e) {
+				error(e.toString());
 			}
 		}
 	}
@@ -326,6 +331,9 @@ public class BatPathFinderUI implements SolvedListener {
 				if ((!end.isReachable(nav))) {
 					report("Destination unreachable.");
 					return;
+				}
+				if (end.getContinent() == 5) {
+					nav = false;
 				}
 				if (solving) {
 					report("Still solving previous assignment. Use \"$w abort\" to abort.");
@@ -539,7 +547,7 @@ public class BatPathFinderUI implements SolvedListener {
 			} else if (cmds.length > 2) {
 				String regex = "L ([0-5]) ([0-9]+)(?:x|)(?: |,|, )([0-9]+)";
 				Pattern p = Pattern.compile(regex);
-				String cmd = cmds[1] + " " + cmds[2] + " " + cmds[3] + " " + cmds[4];
+				String cmd = String.join(" ", cmds);
 				Matcher m = p.matcher(cmd);
 				if (m.find()) {
 					String goTo = "L " + m.group(1) + " " + m.group(2) + " " + m.group(3);
@@ -799,7 +807,7 @@ public class BatPathFinderUI implements SolvedListener {
 				}
 				
 	    		if(start.getContinent() != end.getContinent()) {
-	    			if (travel == 2)
+	    			if (travel == 1 || travel == 2)
 	    				window.setTravel(5);
 	    			if (travel == 3)
 						window.setTravel(4);

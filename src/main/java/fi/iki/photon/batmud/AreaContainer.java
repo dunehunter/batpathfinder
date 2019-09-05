@@ -441,13 +441,13 @@ public class AreaContainer {
 	 */
 	
 	private NameLocation getNameLocation(String name) {
-//		return allNames.get(name.toLowerCase());
-        for (Map.Entry<String, NameLocation> e : allNames.entrySet()) {
-            if (isSubstring(name.toLowerCase(), e.getKey()) != -1) {
-                return e.getValue();
-            }
-        }
-        return null;
+		return allNames.get(name.toLowerCase());
+//        for (Map.Entry<String, NameLocation> e : allNames.entrySet()) {
+//            if (isSubstring(name.toLowerCase(), e.getKey()) != -1) {
+//                return e.getValue();
+//            }
+//        }
+//        return null;
 	}
 
     private static int isSubstring(String s1, String s2)
