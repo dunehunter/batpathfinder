@@ -203,7 +203,7 @@ public class BatPathFinderUI implements SolvedListener {
 			boolean first = true;
 			boolean sailed = false;
 			for (i = 0; i < parts.length && length < limit - 1 && !sailed; ) {
-				if (parts[i] == null || parts[i].equals("")  || !isDirection(parts[i])) {
+				if (parts[i] == null || parts[i].equals("")) {
 					++i;
 					continue;
 				}
@@ -218,7 +218,7 @@ public class BatPathFinderUI implements SolvedListener {
 						command = command + currLength + " " + parts[i+1].replace("~", " ");
 					}
 					i += 2;
-				} else {
+				} else if (isDirection(parts[i])) {
 					length++;
 					if (first && parts[i].startsWith("*")) {
 						command = "sail " + parts[i].substring(1);
@@ -230,6 +230,8 @@ public class BatPathFinderUI implements SolvedListener {
 							command = command + parts[i].replace("~", " ");
 						}
 					}
+					i++;
+				} else {
 					i++;
 				}
 				first = false;
