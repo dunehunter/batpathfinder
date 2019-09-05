@@ -111,6 +111,11 @@ public class BatPathFinderUI implements SolvedListener {
 			plugin.output(e.toString() + "\n");			
 		}
 	}
+
+
+	private boolean isDirection(String s) {
+		return s.equals("n") || s.equals("s") || s.equals("w") || s.equals("e") || s.equals("nw") || s.equals("ne") || s.equals("sw") || s.equals("se");
+	}
 	
 
 	/**
@@ -198,7 +203,7 @@ public class BatPathFinderUI implements SolvedListener {
 			boolean first = true;
 			boolean sailed = false;
 			for (i = 0; i < parts.length && length < limit - 1 && !sailed; ) {
-				if (parts[i] == null || parts[i].equals("")) {
+				if (parts[i] == null || parts[i].equals("")  || !isDirection(parts[i])) {
 					++i;
 					continue;
 				}
